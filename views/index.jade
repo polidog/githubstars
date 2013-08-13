@@ -3,22 +3,23 @@ extends layout
 block content
   div.row
     div#bb_search_view.span12(style="text-align:center")
+      img(src="/images/Octocat.png")
       div.input-append
-        input(type="text")
+        input(type="text",placeholder="username...")
         button.btn.btn-primary.btn-smail Search
-    div.span12(style="text-align:center")
+    div#bb_scroll_view.span12(style="text-align:center")
       ul#bb_list_view.thumbnails
 
 
   script#star-template(type='text/template')
     div.thumbnail
       <% if (org.avatar_url !== undefined) { %>
-      url = <%= org.avatar_url %>
-      img(src='#{url}')
+      | <img src="<%= org.avatar_url %>" data-src="holder.js/300x200">
       <% } %>
       h3 <%= repo.name %>
-      p 
-        a(href='<%= repo.url %>') <%= repo.url %>
+      p
+      | <a href="<%= repo.url %>"><%= repo.url %></a>
 
 append javascripts
+  script#star-template(type='text/template', src="/javascripts/templates/star-template.js")
   script(src="/javascripts/app.js")

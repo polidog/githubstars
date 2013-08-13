@@ -8,15 +8,24 @@ var github = new GitHubApi({
 
 
 exports.index = function(req, res){
-  github.events.getFromUserPublic({'user':'polidog'},function(err,json){
+
+  if (req.query === undefined || req.query.user === undefined) {
+    res.json(500,{ status:false, message: "no user data" });
+  }
+
+  if (req.query.page === undefined) req.query.page = 1;
+
+  github.events.getFromUserPublic({'user':req.query.user,'page': req.query.page},function(err,json){
     var stars = [];
     json.forEach(function(item){
       if (item.type === "WatchEvent" && item.payload.action === "started") {
         stars.push(item);
       }
     });
-
-    res.json(200,{ status:true, stars: stars });
-
+    if (stars.length > 1) {
+      res.json(200,{ status:true, stars: stars });
+    } else {
+      res.json(500,{ status:false });
+    }
   });
 };

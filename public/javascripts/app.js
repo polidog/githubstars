@@ -63,9 +63,18 @@ $(function(){
       'click .btn':'search'
     },
 
+    // starsListView object
+    starsListView: null,
+
+    initialize: function(options) {
+      this.starsListView = options.starsListView;
+    },
+
+
     // 検索イベント処理
     search: function(e) {
-      console.log('search in');
+      this.starsListView.collection.user = $(e.delegateTarget).find("input").val();
+      this.starsListView.load(null,true);
       return false;
     }
   });
@@ -116,6 +125,7 @@ $(function(){
     // 初期化処理
     initialize: function() {
       this.reset();
+      $(window).on('scroll',$.proxy(this.moreLoad,this));
     },
 
     // リセット
@@ -126,12 +136,42 @@ $(function(){
     },
 
     // データのロード
-    load: function() {
+    load: function(callback, remove) {
+      if (remove === undefined) remove = false;
+      this.isLoading = true;
       this.collection.fetch({
         dataType: 'json',
+        remove: remove,
         success: $.proxy(this.render, this)
       });
+
       return this;
+    },
+
+    // 続きをロードする
+    moreLoad: function() {
+      if (this.isLoading) return ;
+
+      var triggerPoint = 100;
+
+      var scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
+      var clientHeight = document.body.clientHeight;
+      var scrollHeight = document.body.scrollHeight || document.docomentElement.scrollHeight;
+
+      // Firefox・Chrome対応
+      if(scrollHeight === clientHeight) {
+        clientHeight = window.innerHeight;
+      }
+
+      // コンテンツ領域の底までの残り領域
+      var remain = scrollHeight - clientHeight - scrollTop;
+
+      // 一番下までスクロールされたら
+      if(remain <= 0) {
+        console.log("more load");
+        this.collection.page += 1;
+        this.load();
+      }
     },
 
     // コレクションの表示処理
@@ -143,20 +183,17 @@ $(function(){
         console.log(model.toJSON());
         _this.$el.append(view.render().el);
       });
+      this.isLoading = false;
     }
 
   });
 
-  var AppView = Backbone.View.extend({
-
-  });
 
   App = {};
   App.star = new Star();
-  App.searchView = new SerachView();
   App.starsCollection = new StarsCollection();
-  App.starListView = new StarsListView();
-  App.starListView.load();
+  App.starsListView = new StarsListView();
+  App.searchView = new SerachView(App);
 
 });
 
