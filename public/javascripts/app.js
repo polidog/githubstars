@@ -133,7 +133,8 @@ $(function(){
     initialize: function() {
       this.reset();
       $(window).on('scroll',$.proxy(this.moreLoad,this));
-      this.on('loadStart')
+      this.on('loadStart',this.loadStart);
+      this.on('loadEnd',this.loadEnd);
     },
 
     // リセット
@@ -146,7 +147,8 @@ $(function(){
     // データのロード
     load: function(callback, remove) {
       if (remove === undefined) remove = false;
-      this.isLoading = true;
+      this.trigger('loadStart');
+
       this.collection.fetch({
         dataType: 'json',
         remove: remove,
@@ -176,7 +178,6 @@ $(function(){
 
       // 一番下までスクロールされたら
       if(remain <= 0) {
-        console.log("more load");
         this.collection.page += 1;
         this.load();
       }
@@ -188,10 +189,9 @@ $(function(){
       this.$el.empty();
       collection.each(function(model){
         var view = new StarView({model:model});
-        console.log(model.toJSON());
         _this.$el.append(view.render().el);
       });
-      this.isLoading = false;
+      this.trigger('loadEnd');
     },
 
     loadStart: function() {
