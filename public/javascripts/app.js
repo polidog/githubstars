@@ -60,7 +60,8 @@ $(function(){
 
     // 設定するイベント
     events: {
-      'click .btn':'search'
+      'click .btn':'search',
+      'keypress input[type=text]':'searchEnter'
     },
 
     // starsListView object
@@ -76,6 +77,12 @@ $(function(){
       this.starsListView.collection.user = $(e.delegateTarget).find("input").val();
       this.starsListView.load(null,true);
       return false;
+    },
+
+    // エンター押された場合の挙動
+    searchEnter: function(e) {
+      if (e.keyCode != 13) return;
+      this.search(e);
     }
   });
 
