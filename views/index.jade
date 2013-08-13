@@ -1,0 +1,24 @@
+extends layout
+
+block content
+  div.row
+    div#bb_search_view.span12(style="text-align:center")
+      div.input-append
+        input(type="text")
+        button.btn.btn-primary.btn-smail Search
+    div.span12(style="text-align:center")
+      ul#bb_list_view.thumbnails
+
+
+  script#star-template(type='text/template')
+    div.thumbnail
+      <% if (org.avatar_url !== undefined) { %>
+      url = <%= org.avatar_url %>
+      img(src='#{url}')
+      <% } %>
+      h3 <%= repo.name %>
+      p 
+        a(href='<%= repo.url %>') <%= repo.url %>
+
+append javascripts
+  script(src="/javascripts/app.js")
