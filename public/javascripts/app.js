@@ -212,6 +212,7 @@ $(function(){
       var _this = this;
       this.$el.empty();
       collection.each(function(model){
+        console.log(model.toJSON());
         var view = new StarView({model:model});
         _this.$el.append(view.render().el);
       });
