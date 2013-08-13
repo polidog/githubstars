@@ -4,6 +4,9 @@ block content
   div.row
     div#bb_search_view.span12(style="text-align:center")
       img(src="/images/Octocat.png")
+      div
+        h2 ghstr
+        p  スターの履歴を見たいユーザー名をいれて検索してね。
       div.input-append
         input(type="text",placeholder="username...")
         button.btn.btn-primary.btn-smail Search
@@ -19,6 +22,9 @@ block content
       h3 <%= repo.name %>
       p
       | <a href="<%= repo.url %>"><%= repo.url %></a>
+      div
+        span.label created_at
+        spna <%= created_at %>
 
 append javascripts
   script#star-template(type='text/template', src="/javascripts/templates/star-template.js")

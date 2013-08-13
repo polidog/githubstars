@@ -126,6 +126,7 @@ $(function(){
     initialize: function() {
       this.reset();
       $(window).on('scroll',$.proxy(this.moreLoad,this));
+      this.on('loadStart')
     },
 
     // リセット
@@ -183,6 +184,14 @@ $(function(){
         console.log(model.toJSON());
         _this.$el.append(view.render().el);
       });
+      this.isLoading = false;
+    },
+
+    loadStart: function() {
+      this.isLoading = true;
+    },
+
+    loadEnd: function() {
       this.isLoading = false;
     }
 
