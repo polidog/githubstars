@@ -3,24 +3,21 @@ extends layout
 block content
   div.row
     div#bb_search_view.span12(style="text-align:center")
-      img(src="/images/Octocat.png",style="width:240px")
-      div
-        h2 ghstr
-        p  スターの履歴を見たいユーザー名をいれて検索してね。
+      img(src="/images/Octocat.png",style="width:560px")
       div.input-append
+        h2 ghstr
         input(type="text",placeholder="username...")
         button.btn.btn-primary.btn-smail Search
     div#bb_scroll_view.span12(style="text-align:center")
       ul#bb_list_view.thumbnails
-
-    div#bb_loading
+      div#bb_loading_view
 
   script#star-template(type='text/template')
     div.thumbnail
       <% if (org.avatar_url !== undefined) { %>
       | <img src="<%= org.avatar_url %>" data-src="holder.js/300x200">
       <% } %>
-      h3 <%= repo.name %>
+      h4 <%= repo.name %>
       p
       | <a href="https://github.com/<%= repo.name %>" target="_blank">ページを見る</a>
       div
@@ -28,7 +25,7 @@ block content
         spna <%= created_at %>
 
   script#loading-template(type='text/template')
-    img(src="/images/mark.png")
+    img(src="/images/mark.png") loading...
 
 append javascripts
   script#star-template(type='text/template', src="/javascripts/templates/star-template.js")

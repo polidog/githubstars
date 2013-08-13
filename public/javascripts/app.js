@@ -54,7 +54,7 @@ $(function(){
 
   // ローディング用のビュー
   var LoadingView = Backbone.View.extend({
-    el: 'bb_loading_view',
+    el: '#bb_loading_view',
 
     template: _.template($('#loading-template').html()),
 
@@ -112,7 +112,7 @@ $(function(){
     // タグ名の指定
     tagName: 'li',
 
-    className: 'span6',
+    className: 'span5',
 
     // モデル
     model: Star,
@@ -176,7 +176,8 @@ $(function(){
       this.collection.fetch({
         dataType: 'json',
         remove: remove,
-        success: $.proxy(this.render, this)
+        success: $.proxy(this.render, this),
+        error: $.proxy(this.errorRender, this),
       });
 
       return this;
@@ -212,12 +213,18 @@ $(function(){
       var _this = this;
       this.$el.empty();
       collection.each(function(model){
-        console.log(model.toJSON());
         var view = new StarView({model:model});
         _this.$el.append(view.render().el);
       });
       this.trigger('loadEnd');
     },
+
+    errorRender: function(err) {
+      if (err.models.length == 0) {
+        //@todo error render
+      }
+      this.trigger('loadEnd');
+    },  
 
     loadStart: function() {
       this.isLoading = true;
