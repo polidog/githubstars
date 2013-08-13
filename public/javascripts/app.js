@@ -52,6 +52,24 @@ $(function(){
 
   });
 
+  // ローディング用のビュー
+  var LoadingView = Backbone.View.extend({
+    el: 'bb_loading_view',
+
+    template: _.template($('#loading-template').html()),
+
+    render: function() {
+      this.$el.html(this.template({}));
+      return this;
+    },
+
+    removeRender: function() {
+      this.$el.html("");
+      return this;
+    }
+
+  });
+
   // 検索用のビュー
   var SerachView = Backbone.View.extend({
 
@@ -71,11 +89,14 @@ $(function(){
       this.starsListView = options.starsListView;
     },
 
-
     // 検索イベント処理
     search: function(e) {
+      this.starsListView.reset();
       this.starsListView.collection.user = $(e.delegateTarget).find("input").val();
-      this.starsListView.load(null,true);
+      if (this.starsListView.collection.user !== "") {
+        this.starsListView.load(null,true);
+      }
+
       return false;
     },
 
@@ -129,6 +150,8 @@ $(function(){
     // 全てのページ読み込んだかのフラグ
     isMax: false,
 
+    loadingView: null,
+
     // 初期化処理
     initialize: function() {
       this.reset();
@@ -142,6 +165,7 @@ $(function(){
       this.isLoading = false;
       this.isMax = false;
       this.collection = new StarsCollection();
+      this.$el.html("");
     },
 
     // データのロード
@@ -196,10 +220,13 @@ $(function(){
 
     loadStart: function() {
       this.isLoading = true;
+      this.loadingView = new LoadingView();
+      this.loadingView.render();
     },
 
     loadEnd: function() {
       this.isLoading = false;
+      this.loadingView.removeRender();
     }
 
   });

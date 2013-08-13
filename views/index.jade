@@ -13,6 +13,7 @@ block content
     div#bb_scroll_view.span12(style="text-align:center")
       ul#bb_list_view.thumbnails
 
+    div#bb_loading
 
   script#star-template(type='text/template')
     div.thumbnail
@@ -25,6 +26,9 @@ block content
       div
         span.label created_at
         spna <%= created_at %>
+
+  script#loading-template(type='text/template')
+    img(src="/images/mark.png")
 
 append javascripts
   script#star-template(type='text/template', src="/javascripts/templates/star-template.js")

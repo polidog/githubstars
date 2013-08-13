@@ -18,7 +18,7 @@ exports.index = function(req, res){
 
   github.events.getFromUserPublic({'user':req.query.user,'page': req.query.page},function(err,json){
     var stars = [];
-    if (!json) res.json(500,{ status:false });
+    if (json === undefined) res.json(500,{ status:false });
 
     json.forEach(function(item){
       if (item.type === "WatchEvent" && item.payload.action === "started") {
