@@ -73,7 +73,8 @@ $(function(){
 
   // エラー用のビュー画面
   var ErrorView = Backbone.View.extend({
-
+    el: '#bb_error_view',
+    
     message: null,
 
     template: _.template($('#error-template').html()),
@@ -241,7 +242,10 @@ $(function(){
       if (err.models.length == 0) {
         //@todo error render
       }
-      
+      var error = new ErrorView({
+        'message': 'エラーが発生しました'
+      });
+      error.render();
       this.trigger('loadEnd');
     },  
 

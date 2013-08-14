@@ -2,6 +2,7 @@ extends layout
 
 block content
   div.container
+    div#bb_error_view
     div.row
       div#bb_search_view.span12(style="text-align:center")
         img(src="/images/Octocat.png",style="width:560px")
@@ -33,7 +34,6 @@ block content
   script#error-template(type='text/template')
     div.alert.alert-error
       button.close(type="button",data-dismiss="alert")
-      strong エラー
       <%= message %>
 
 append javascripts
