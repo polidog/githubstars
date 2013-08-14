@@ -47,6 +47,7 @@ $(function(){
 
     // 戻り値処理
     parse: function(res) {
+      console.log(res);
       return res.stars;
     }
 
@@ -66,6 +67,23 @@ $(function(){
     removeRender: function() {
       this.$el.html("");
       return this;
+    }
+
+  });
+
+  // エラー用のビュー画面
+  var ErrorView = Backbone.View.extend({
+
+    message: null,
+
+    template: _.template($('#error-template').html()),
+
+    initialize: function(options) {
+      this.message = options.message;
+    },
+
+    render: function() {
+      this.$el.html(this.template({message: this.message}));
     }
 
   });
@@ -223,6 +241,7 @@ $(function(){
       if (err.models.length == 0) {
         //@todo error render
       }
+      
       this.trigger('loadEnd');
     },  
 

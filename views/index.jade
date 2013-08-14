@@ -13,6 +13,7 @@ block content
         ul#bb_list_view.thumbnails
       div.span12
         div#bb_loading_view
+        p Copyright © polidog lab 
 
   script#star-template(type='text/template')
     div.thumbnail
@@ -28,6 +29,12 @@ block content
 
   script#loading-template(type='text/template')
     img.loading(src="/images/mark.png") loading...
+
+  script#error-template(type='text/template')
+    div.alert.alert-error
+      button.close(type="button",data-dismiss="alert")
+      strong エラー
+      <%= message %>
 
 append javascripts
   script#star-template(type='text/template', src="/javascripts/templates/star-template.js")
