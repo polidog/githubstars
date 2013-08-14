@@ -1,8 +1,14 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+.loading {
+   transform:rotate(360deg);
 }
 
-a {
-  color: #00B7FF;
+body {
+  background-color: #333;
+}
+
+div.container {
+  margin-top: 20px;
+  background-color: #fff;
+  border:10px solid #000;
+  text-align:center;
 }
