@@ -40,7 +40,7 @@ $(function(){
     // 検索対象のユーザー
     user: null,
 
-    isMaxPage: false;
+    isMaxPage: false,
 
     // url設定
     url: function() {
