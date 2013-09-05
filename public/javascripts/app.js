@@ -40,6 +40,8 @@ $(function(){
     // 検索対象のユーザー
     user: null,
 
+    isMaxPage: false;
+
     // url設定
     url: function() {
       return '/stars.json?page='+this.page+'&user='+this.user;
@@ -47,7 +49,6 @@ $(function(){
 
     // 戻り値処理
     parse: function(res) {
-      console.log(res);
       return res.stars;
     }
 
