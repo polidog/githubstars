@@ -1,7 +1,7 @@
 extends layout
 
 block content
-  div.container
+  div.container#app
     div#bb_error_view
     div.row
       div#bb_search_view.span12(style="text-align:center")
@@ -14,7 +14,7 @@ block content
         ul#bb_list_view.thumbnails
       div.span12
         div#bb_loading_view
-        p Copyright © polidog lab 
+        p Copyright © polidog lab
 
   script#star-template(type='text/template')
     div.thumbnail
@@ -37,5 +37,11 @@ block content
       <%= message %>
 
 append javascripts
-  script#star-template(type='text/template', src="/javascripts/templates/star-template.js")
+  script(src="/javascripts/namespace.js")
+  script(src="/javascripts/models/star.js")
+  script(src="/javascripts/collections/stars.js")
+  script(src="/javascripts/views/search_box.js")
+  script(src="/javascripts/views/star_list.js")
+  script(src="/javascripts/views/star.js")
+  script(src="/javascripts/views/loading.js")
   script(src="/javascripts/app.js")

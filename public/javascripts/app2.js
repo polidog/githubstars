@@ -88,7 +88,7 @@ $(function(){
     },
 
     initialize: function(options) {
-       
+
     },
 
     search: function(event) {
@@ -127,7 +127,7 @@ $(function(){
     render: function() {
       this.$el.html(this.template(this.model.toJSON()));
       return this;
-    }    
+    }
   });
 
   var StarListView = Backbone.View.extend({
@@ -135,7 +135,7 @@ $(function(){
     el: '#bb_list_view',
 
     // 使用するコレクション
-    collection: StarList, 
+    collection: StarList,
 
     // 初期化処理
     initialize: function() {
@@ -146,11 +146,11 @@ $(function(){
       var view = new StarView({model:model});
       this.$el.append(view.render().el);
     },
- 
+
     onResetRender: function(collection) {
       this.$el.find('li').remove();
       collection.each($.proxy(this.render,this));
-    } 
+    }
   });
 
 
