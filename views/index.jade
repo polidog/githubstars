@@ -4,7 +4,7 @@ block content
   div.container#app
     div#bb_error_view
     div.row
-      div#bb_search_view.span12
+      div#bb_search_view.span12.text-center
         img(src="/images/Octocat.png",style="width:560px")
         div.input-append
           h2 ghstr
@@ -12,11 +12,12 @@ block content
           button.btn.btn-primary.btn-smail Search
       div#bb_scroll_view.span12.offset1
         ul#bb_list_view.thumbnails
-      div.span12
+      div#loading.hide.text-center
+        img(src="images/load.gif")
+      div.span12.span12.text-center
         div#bb_loading_view
         p Copyright © polidog lab
-    div#loading.hide
-      img(src="images/load.gif")
+
 
   script#star-template(type='text/template')
     div.thumbnail
@@ -24,15 +25,15 @@ block content
       | <img src="<%= org.avatar_url %>" data-src="holder.js/300x200">
       <% } %>
       div.caption
-        p <%= repo.name %>
+        h3 <%= repo.name %>
         p
-        | <a href="https://github.com/<%= repo.name %>" target="_blank">ページを見る</a>
+        | <a class="btn btn-smail btn-primary" href="https://github.com/<%= repo.name %>" target="_blank">ページを見る</a>
         p
-          span.label created_at
+          span.label.label-info 作った人
+          <%= repo.name.replace(/\/.*/,'') %>
+        p
+          span.label.label-info 登録日
           spna <%= new Date(created_at).toLocaleString() %>
-
-  script#loading-template(type='text/template')
-    img.loading(src="/images/mark.png") loading...
 
   script#error-template(type='text/template')
     div.alert.alert-error
