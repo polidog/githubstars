@@ -1,6 +1,5 @@
 var GitHubApi = require("github");
 var memcache = require('memcache');
-var Q = require('q');
 
 // github apiの設定
 var github = new GitHubApi({
@@ -22,11 +21,7 @@ exports.index = function(req, res){
 
   // キャッシュの読み込み
   var cacheKey = "ghstr_" + req.query.user + "_" + req.query.page;
-  Q.fcall(client.get(cacheKey)).then(function(value){
-    console.log("then");
-  }).fail(function(error){
-    console.log(error);
-  });
+
 
   github.events.getFromUserPublic({'user':req.query.user,'page': req.query.page},function(err,json){
 
