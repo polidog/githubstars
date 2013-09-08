@@ -9,7 +9,8 @@ block content
         div.input-append
           h2 ghstr
           input(type="text",placeholder="username...")
-          button.btn.btn-primary.btn-smail Search
+          button.btn.btn-primary.btn-smail
+            i.icon-search.icon-white
       div#bb_scroll_view.span12.offset1
         ul#bb_list_view.thumbnails
       div#loading.hide.text-center
@@ -22,18 +23,15 @@ block content
   script#star-template(type='text/template')
     div.thumbnail
       <% if (org.avatar_url !== undefined) { %>
-      | <img src="<%= org.avatar_url %>" data-src="holder.js/300x200">
+      | <img src="<%= org.avatar_url %>" data-src="holder.js/50x50" width="100">
       <% } %>
       div.caption
         h3 <%= repo.name %>
         p
-        | <a class="btn btn-smail btn-primary" href="https://github.com/<%= repo.name %>" target="_blank">ページを見る</a>
+        | <a class="btn btn-smail btn-primary" href="https://github.com/<%= repo.name %>" target="_blank"><i class="icon-book icon-white"></i> ページを見る</a> <a class="btn btn-smail" href="https://github.com/<%= repo.name.replace(/\/.*/,'') %>" target="_blank"><i class="icon-user"></i> <%= repo.name.replace(/\/.*/,'') %></a>
         p
-          span.label.label-info 作った人
-          <%= repo.name.replace(/\/.*/,'') %>
-        p
-          span.label.label-info 登録日
-          spna <%= new Date(created_at).toLocaleString() %>
+          span.label.label-info registerd by
+          <%= new Date(created_at).toLocaleString() %>
 
   script#error-template(type='text/template')
     div.alert.alert-error
