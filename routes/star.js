@@ -1,6 +1,6 @@
 var GitHubApi = require("github");
 var memcache = require('memcache');
-var Q = require('Q');
+var Q = require('q');
 
 // github apiの設定
 var github = new GitHubApi({
