@@ -2,8 +2,6 @@ Ghstr.Collections.Stars = Backbone.Collection.extend({
 
   model: Ghstr.Models.Star,
 
-  page: 1,
-
   isLoading: false,
 
   user: null,
@@ -41,6 +39,10 @@ Ghstr.Collections.Stars = Backbone.Collection.extend({
 
   setQuery: function(key,value) {
     this.query[key] = value;
+  },
+
+  pageUp: function() {
+    this.query.page++;
   },
 
   // 検索パラメータリセット

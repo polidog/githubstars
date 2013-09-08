@@ -5,6 +5,7 @@ Ghstr.Views.StarList = Backbone.View.extend({
     // 初期化処理
     initialize: function() {
       this.listenTo(this.collection,'reset', this.onResetRender);
+      this.listenTo(this.collection,'add', this.onAddRender);
     },
 
     render: function(model) {
@@ -15,5 +16,9 @@ Ghstr.Views.StarList = Backbone.View.extend({
     onResetRender: function(collection) {
       this.$el.find('li').remove();
       collection.each($.proxy(this.render,this));
+    },
+
+    onAddRender: function(model) {
+      this.render(model);
     }
 });
