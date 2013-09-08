@@ -13,7 +13,7 @@ Ghstr.Views.SearchBox = Backbone.View.extend({
     if (typeof(event.keyCode) !== 'undefined') {
       if (event.keyCode != 13) return;
     }
-    this.collection.setQuery('user','polidog');
+    this.collection.setQuery('user',this.$el.find('input[type=text]').val());
     this.collection.fetch({
       dataType: 'json',
       reset: true

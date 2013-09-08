@@ -4,29 +4,32 @@ block content
   div.container#app
     div#bb_error_view
     div.row
-      div#bb_search_view.span12(style="text-align:center")
+      div#bb_search_view.span12
         img(src="/images/Octocat.png",style="width:560px")
         div.input-append
           h2 ghstr
           input(type="text",placeholder="username...")
           button.btn.btn-primary.btn-smail Search
-      div#bb_scroll_view.span12.offset1(style="text-align:center")
+      div#bb_scroll_view.span12.offset1
         ul#bb_list_view.thumbnails
       div.span12
         div#bb_loading_view
         p Copyright © polidog lab
+    div#loading.hide
+      img(src="images/load.gif")
 
   script#star-template(type='text/template')
     div.thumbnail
       <% if (org.avatar_url !== undefined) { %>
       | <img src="<%= org.avatar_url %>" data-src="holder.js/300x200">
       <% } %>
-      h4 <%= repo.name %>
-      p
-      | <a href="https://github.com/<%= repo.name %>" target="_blank">ページを見る</a>
-      div
-        span.label created_at
-        spna <%= created_at %>
+      div.caption
+        p <%= repo.name %>
+        p
+        | <a href="https://github.com/<%= repo.name %>" target="_blank">ページを見る</a>
+        p
+          span.label created_at
+          spna <%= new Date(created_at).toLocaleString() %>
 
   script#loading-template(type='text/template')
     img.loading(src="/images/mark.png") loading...

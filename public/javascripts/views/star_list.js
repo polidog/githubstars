@@ -10,6 +10,7 @@ Ghstr.Views.StarList = Backbone.View.extend({
 
     render: function(model) {
       var view = new Ghstr.Views.Star({model:model});
+      view.$el.addClass('span5');
       this.$el.append(view.render().el);
     },
 
